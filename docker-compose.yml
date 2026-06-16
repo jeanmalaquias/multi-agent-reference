@@ -1,0 +1,34 @@
+# Local dependencies for the reference architecture.
+# The vertical slice runs without these (offline mock provider); they back the
+# memory layer and observability once real providers/tools are wired in.
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: magent
+      POSTGRES_PASSWORD: magent
+      POSTGRES_DB: magent
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  langfuse:
+    image: langfuse/langfuse:latest
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://magent:magent@postgres:5432/magent
+      NEXTAUTH_SECRET: change-me
+      SALT: change-me
+      NEXTAUTH_URL: http://localhost:3000
+    ports:
+      - "3000:3000"
+
+volumes:
+  pgdata:
