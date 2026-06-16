@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from ..config import get_settings
 from ..graph.state import Finding, RunState
-from ..providers import Message, get_provider
+from ..providers import Message
+from ..runtime import resolve_provider
 from ..tools import default_registry
 
 _SYSTEM = (
@@ -15,7 +15,7 @@ _SYSTEM = (
 
 async def researcher_node(state: RunState) -> dict:
     """Gather one finding per subtask. Returns a partial state update."""
-    provider = get_provider(get_settings().provider_for("researcher"))
+    provider = resolve_provider("researcher")
     registry = default_registry()
 
     findings: list[Finding] = []

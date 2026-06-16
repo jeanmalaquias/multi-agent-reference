@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import re
 
-from ..config import get_settings
 from ..graph.state import Critique, RunState
-from ..providers import Message, get_provider
+from ..providers import Message
+from ..runtime import resolve_provider
 
 _SYSTEM = (
     "You are the Critic. Judge whether the draft satisfies the acceptance "
@@ -17,7 +17,7 @@ _SCORE_RE = re.compile(r"score=([0-9]*\.?[0-9]+)")
 
 async def critic_node(state: RunState) -> dict:
     """Evaluate the draft. Returns a partial state update incl. revision count."""
-    provider = get_provider(get_settings().provider_for("critic"))
+    provider = resolve_provider("critic")
     user = (
         f"Acceptance criteria: {'; '.join(state.acceptance_criteria)}\n"
         f"Draft:\n{state.draft}"

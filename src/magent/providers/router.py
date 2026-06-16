@@ -5,13 +5,15 @@ Adding a real provider is a one-line registry entry; agents never change.
 
 from __future__ import annotations
 
+from .anthropic import AnthropicProvider
 from .base import LLMProvider
 from .mock import MockProvider
 
 # Registry of available provider factories. Real adapters register here as they
-# are implemented (anthropic, bedrock, azure_foundry, vertex).
+# are implemented (bedrock, azure_foundry, vertex are next).
 _REGISTRY: dict[str, type] = {
     "mock": MockProvider,
+    "anthropic": AnthropicProvider,
 }
 
 

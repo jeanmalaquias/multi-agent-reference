@@ -2,9 +2,9 @@
 
 from __future__ import annotations
 
-from ..config import get_settings
 from ..graph.state import RunState
-from ..providers import Message, get_provider
+from ..providers import Message
+from ..runtime import resolve_provider
 
 _SYSTEM = (
     "You are the Writer. Using the research findings, produce the final "
@@ -14,7 +14,7 @@ _SYSTEM = (
 
 async def writer_node(state: RunState) -> dict:
     """Write the artifact draft. Returns a partial state update."""
-    provider = get_provider(get_settings().provider_for("writer"))
+    provider = resolve_provider("writer")
     evidence = "\n".join(f"- {f.content}" for f in state.findings)
     feedback = state.critique.feedback if state.critique else ""
     user = (

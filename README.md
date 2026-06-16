@@ -104,12 +104,14 @@ src/magent/
 ## Status / roadmap
 
 - [x] Architecture doc + ADRs
-- [ ] State schema + graph stub
-- [ ] End-to-end mock vertical slice (4 agents, mock tool, mock provider)
-- [ ] Real providers (Anthropic → Bedrock → Foundry → Vertex)
-- [ ] MCP tool layer (3 servers)
-- [ ] Observability, guardrails, eval harness
-- [ ] Helm chart + IaC + CI eval gate
+- [x] State schema + LangGraph orchestrator
+- [x] End-to-end mock vertical slice (4 agents, mock tool, mock provider)
+- [x] Guardrails (pre/post moderation) on every LLM call
+- [x] OpenTelemetry tracing on every LLM call (token usage + cost-ready)
+- [x] First real provider adapter (Anthropic); Bedrock → Foundry → Vertex next
+- [ ] MCP tool layer (3 servers: web_search, vector_retrieval, code_search)
+- [ ] Ragas + LLM-as-Judge eval harness with CI gate
+- [ ] Helm chart + IaC (Bicep/Terraform)
 
 ## License
 
