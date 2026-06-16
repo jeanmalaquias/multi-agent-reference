@@ -84,6 +84,10 @@ cp .env.example .env
 
 # 4. Run a goal through the pipeline
 python -m magent.cli run "Write a one-page brief on X"
+
+# 5. (Optional) run the tools as a standalone MCP server (stdio)
+pip install -e ".[mcp]"
+python -m magent.mcp_servers.server
 ```
 
 ## Project layout
@@ -109,7 +113,7 @@ src/magent/
 - [x] Guardrails (pre/post moderation) on every LLM call
 - [x] OpenTelemetry tracing on every LLM call (token usage + cost-ready)
 - [x] First real provider adapter (Anthropic); Bedrock → Foundry → Vertex next
-- [ ] MCP tool layer (3 servers: web_search, vector_retrieval, code_search)
+- [x] MCP tool layer — FastMCP server (web_search, vector_retrieval, code_search) + MCP client
 - [ ] Ragas + LLM-as-Judge eval harness with CI gate
 - [ ] Helm chart + IaC (Bicep/Terraform)
 
