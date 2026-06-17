@@ -7,13 +7,19 @@ from __future__ import annotations
 
 from .anthropic import AnthropicProvider
 from .base import LLMProvider
+from .bedrock import BedrockProvider
+from .foundry import FoundryProvider
 from .mock import MockProvider
+from .vertex import VertexProvider
 
-# Registry of available provider factories. Real adapters register here as they
-# are implemented (bedrock, azure_foundry, vertex are next).
+# Registry of available provider factories — switch any agent's provider via
+# config (ADR-003) without touching agent code.
 _REGISTRY: dict[str, type] = {
     "mock": MockProvider,
     "anthropic": AnthropicProvider,
+    "bedrock": BedrockProvider,
+    "vertex": VertexProvider,
+    "foundry": FoundryProvider,
 }
 
 

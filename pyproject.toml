@@ -22,7 +22,8 @@ dependencies = [
 
 [project.optional-dependencies]
 providers = [
-    "anthropic>=0.40",
+    "anthropic[bedrock,vertex]>=0.40",
+    "openai>=1.40",
 ]
 mcp = [
     "mcp>=1.2",

@@ -115,12 +115,11 @@ src/magent/
 - [x] End-to-end mock vertical slice (4 agents, mock tool, mock provider)
 - [x] Guardrails (pre/post moderation) on every LLM call
 - [x] OpenTelemetry tracing on every LLM call (token usage + cost-ready)
-- [x] First real provider adapter (Anthropic); Bedrock → Foundry → Vertex next
+- [x] All four provider adapters — Anthropic, AWS Bedrock, Vertex AI, Azure Foundry
 - [x] MCP tool layer — FastMCP server (web_search, vector_retrieval, code_search) + MCP client
 - [x] Eval harness (keyword coverage + LLM-as-Judge) with CI gate on regression
 - [x] FastAPI gateway (`/healthz`, `/run`) + Dockerfile
 - [x] Helm chart (Deployment/Service/HPA) + Bicep (Azure Container Apps) + Terraform (AWS ECS Fargate)
-- [ ] Remaining provider adapters (Bedrock → Foundry → Vertex)
 
 ## License
 
