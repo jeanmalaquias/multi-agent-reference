@@ -88,6 +88,9 @@ python -m magent.cli run "Write a one-page brief on X"
 # 5. (Optional) run the tools as a standalone MCP server (stdio)
 pip install -e ".[mcp]"
 python -m magent.mcp_servers.server
+
+# 6. Run the eval gate (fails on >5% regression vs baseline)
+magent-eval run
 ```
 
 ## Project layout
@@ -114,7 +117,7 @@ src/magent/
 - [x] OpenTelemetry tracing on every LLM call (token usage + cost-ready)
 - [x] First real provider adapter (Anthropic); Bedrock → Foundry → Vertex next
 - [x] MCP tool layer — FastMCP server (web_search, vector_retrieval, code_search) + MCP client
-- [ ] Ragas + LLM-as-Judge eval harness with CI gate
+- [x] Eval harness (keyword coverage + LLM-as-Judge) with CI gate on regression
 - [ ] Helm chart + IaC (Bicep/Terraform)
 
 ## License

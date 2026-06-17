@@ -1,0 +1,20 @@
+[
+  {
+    "id": "vector-databases",
+    "goal": "vector databases overview for engineers",
+    "acceptance_criteria": ["accurate", "concise"],
+    "expected_keywords": ["vector", "databases"]
+  },
+  {
+    "id": "semantic-caching",
+    "goal": "semantic caching design tradeoffs",
+    "acceptance_criteria": ["clear", "practical"],
+    "expected_keywords": ["semantic", "caching"]
+  },
+  {
+    "id": "llm-guardrails",
+    "goal": "llm guardrails best practices",
+    "acceptance_criteria": ["practical"],
+    "expected_keywords": ["guardrails"]
+  }
+]
