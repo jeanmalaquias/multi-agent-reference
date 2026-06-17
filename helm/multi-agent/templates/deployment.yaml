@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-multi-agent
+  labels:
+    app: {{ .Release.Name }}-multi-agent
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-multi-agent
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-multi-agent
+    spec:
+      containers:
+        - name: multi-agent
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.targetPort }}
+          env:
+            - name: MAGENT_PLANNER_PROVIDER
+              value: "{{ .Values.config.plannerProvider }}"
+            - name: MAGENT_RESEARCHER_PROVIDER
+              value: "{{ .Values.config.researcherProvider }}"
+            - name: MAGENT_WRITER_PROVIDER
+              value: "{{ .Values.config.writerProvider }}"
+            - name: MAGENT_CRITIC_PROVIDER
+              value: "{{ .Values.config.criticProvider }}"
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.service.targetPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.service.targetPort }}
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
